@@ -4,48 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-final class PasswordGenerator {
+public class PasswordGenerator {
 
     private static final String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
     private static final String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String numbers = "0123456789";
+    private static final String spiecialSigns = "!@#$%&*()_+-=[]|,./?><";
     private boolean useLowerCase;
     private boolean useUpperCase;
+    private boolean useNumbers;
+    private boolean useSpecialSigns;
 
-    private PasswordGenerator() {
-        throw new UnsupportedOperationException("Empty constructor is not supported.");
-    }
-
-    private PasswordGenerator(PasswordGeneratorBuilder builder) {
+    PasswordGenerator(PasswordGeneratorBuilder builder) {
         this.useLowerCase = builder.useLowerCase;
         this.useUpperCase = builder.useUpperCase;
+        this.useNumbers = builder.useNumbers;
+        this.useSpecialSigns = builder.useSpecialSigns;
     }
 
-    public static class PasswordGeneratorBuilder {
-
-        private boolean useLowerCase;
-        private boolean useUpperCase;
-
-        public PasswordGeneratorBuilder() {
-            this.useLowerCase = false;
-            this.useUpperCase = false;
-        }
-
-        public PasswordGeneratorBuilder useLower(boolean useLower) {
-            this.useLowerCase = useLower;
-            return this;
-        }
-        public PasswordGeneratorBuilder useUpper(boolean useUpper) {
-            this.useUpperCase = useUpper;
-            return this;
-        }
-
-        public PasswordGenerator build() {
-            return new PasswordGenerator(this);
-        }
-    }
-
-
-    public String generate(int length) {
+    String generate(int length) {
         if (length <= 0) {
             return "";
         }
@@ -54,12 +31,18 @@ final class PasswordGenerator {
         Random random = new Random(System.nanoTime());
 
         List<String> charCategories;
-        charCategories = new ArrayList<>(2);
+        charCategories = new ArrayList<>(4);
         if (useLowerCase) {
             charCategories.add(lowerCaseLetters);
         }
         if (useUpperCase) {
             charCategories.add(upperCaseLetters);
+        }
+        if (useNumbers) {
+            charCategories.add(numbers);
+        }
+        if (useSpecialSigns) {
+            charCategories.add(spiecialSigns);
         }
 
         for (int i = 0; i < length; i++) {
