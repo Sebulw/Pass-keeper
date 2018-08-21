@@ -1,4 +1,8 @@
-package com.github.passKeeper;
+package pass.keeper;
+
+
+import pass.keeper.generators.PasswordGenerator;
+import pass.keeper.generators.PasswordGeneratorBuilder;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,11 +10,13 @@ public class Main {
         PasswordGenerator passwordGenerator = new PasswordGeneratorBuilder()
                 .useLower(true)
                 .useUpper(true)
-                .useNumbers(true)
-                .useSpecialSigns(true)
+                .useNumbers(false)
+                .useSpecialSigns(false)
                 .build();
         String password = passwordGenerator.generate(20);
 
         System.out.println(password);
+
+
     }
 }

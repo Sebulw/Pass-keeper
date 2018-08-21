@@ -1,4 +1,4 @@
-package com.github.passKeeper;
+package pass.keeper.generators;
 
 public class PasswordGeneratorBuilder {
 
@@ -7,7 +7,7 @@ public class PasswordGeneratorBuilder {
     boolean useNumbers;
     boolean useSpecialSigns;
 
-    public PasswordGeneratorBuilder() {
+     public PasswordGeneratorBuilder() {
         this.useLowerCase = false;
         this.useUpperCase = false;
         this.useNumbers = false;

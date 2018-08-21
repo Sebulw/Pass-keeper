@@ -1,4 +1,4 @@
-package com.github.passKeeper;
+package pass.keeper.generators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class PasswordGenerator {
         this.useSpecialSigns = builder.useSpecialSigns;
     }
 
-    String generate(int length) {
+    public String generate(int length) {
         if (length <= 0) {
             return "";
         }
@@ -51,6 +51,17 @@ public class PasswordGenerator {
             password.append(charCategory.charAt(position));
         }
         return new String(password);
+    }
+
+    private static PasswordGenerator passwordGenerator = new PasswordGeneratorBuilder()
+            .useLower(true)
+            .useUpper(true)
+            .useNumbers(true)
+            .useSpecialSigns(true)
+            .build();
+
+    public static String getPassword(int length) {
+        return passwordGenerator.generate(20);
     }
 
 }
