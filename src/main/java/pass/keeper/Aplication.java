@@ -2,7 +2,6 @@ package pass.keeper;
 
 import org.apache.log4j.Logger;
 import pass.keeper.view.UserInterface;
-
 import java.io.IOException;
 
 class Application {
@@ -16,7 +15,5 @@ class Application {
         userInterface.showMenu();
         userInterface.generateNewPass();
         userInterface.showPasswords();
-
-
     }
 }
