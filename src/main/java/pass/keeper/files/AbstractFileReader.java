@@ -4,17 +4,21 @@ import pass.keeper.model.PasswordEntry;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractFileReader implements FileReader {
 
+    private static String PATH = "C:\\PasswordManager\\storage";
+
     File getFile(String path) {
         if (path == null) {
             throw new IllegalArgumentException("May not be null");
         }
-        ClassLoader classLoader = getClass().getClassLoader();
-        return new File(classLoader.getResource(path).getFile());
+        path = PATH + "\\" + path;
+
+        return Paths.get(path).toFile();
     }
 
     @Override
@@ -33,4 +37,3 @@ abstract class AbstractFileReader implements FileReader {
     @Override
     public abstract List<String> read(String path) throws IOException;
 }
-

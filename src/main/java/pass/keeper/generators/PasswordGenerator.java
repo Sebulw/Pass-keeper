@@ -15,7 +15,7 @@ public class PasswordGenerator {
     private boolean useNumbers;
     private boolean useSpecialSigns;
 
-    PasswordGenerator(PasswordGeneratorBuilder builder) {
+    public PasswordGenerator(PasswordGeneratorBuilder builder) {
         this.useLowerCase = builder.useLowerCase;
         this.useUpperCase = builder.useUpperCase;
         this.useNumbers = builder.useNumbers;
