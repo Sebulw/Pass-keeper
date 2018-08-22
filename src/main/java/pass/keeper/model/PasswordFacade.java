@@ -2,6 +2,8 @@ package pass.keeper.model;
 
 import pass.keeper.generators.PasswordGenerator;
 
+import java.util.Scanner;
+
 public class PasswordFacade {
 
     private PasswordGenerator passwordGenerator;

@@ -1,14 +1,18 @@
 package pass.keeper.view;
 
 import pass.keeper.files.FilesFacade;
+import pass.keeper.model.PasswordEntry;
+import pass.keeper.model.PasswordFacade;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class UserView {
+public class UserInterface {
 
     Scanner skaner = new Scanner(System.in);
 
-    public UserView() {
+    public void showMenu() {
         System.out.println("==============================================================================");
         System.out.println("=                                                                            =");
         System.out.println("=                              Hello!                                        =");
@@ -28,25 +32,25 @@ public class UserView {
         System.out.println("==============================================================================");
     }
 
-    public void UserChoice(Scanner skaner) {
+    public void showPasswords() {
+        FilesFacade filesFacade = new FilesFacade();
 
-        int userChoice = 0;
-        try {
-            userChoice = Integer.parseInt(skaner.nextLine());
-        }catch (NumberFormatException o) {
-            System.out.println("Incorrect data! Please use numbers from menu to choose action.");
-        }
-        switch (userChoice) {
-            case 1:
-                FilesFacade filesFacade = new FilesFacade();
-                filesFacade.readFile("passwords.csv");
-                break;
-            case 2:
+    }
+    public void generateNewPass() {
+        FilesFacade filesFacade = new FilesFacade();
+        PasswordFacade passwordFacade = new PasswordFacade();
+        List<PasswordEntry> entries = filesFacade.getEntries("passwords.txt");
+        System.out.println(entries);
 
-                break;
-            case 3:
-                break;
-        }
+        System.out.println("Type service type");
+        String website = skaner.nextLine();
+        System.out.println("Type your login");
+        String login = skaner.nextLine();
+
+        PasswordEntry pass = passwordFacade.generatePassword(website, login, 20);
+        List<PasswordEntry> list = new ArrayList<>();
+        list.add(pass);
+        filesFacade.writeToFile("passwords.csv", list);
     }
 
 }
